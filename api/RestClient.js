@@ -10,6 +10,29 @@ exports.getFavouriteFood = function getData(url, session, username, callback){
     });
 };
 
+exports.postQnAResults = function getData(url, session, question, callback){
+  var options = {
+      url: url,
+      method: 'POST',
+      headers: {
+          'Ocp-Apim-Subscription-Key': '54a763c4160c4abb834ae7588b3adab1',
+          'Content-Type':'application/json'
+      },
+      json: {
+          "question" : question
+      }
+    };
+
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+          callback(body, session, question);
+      }
+      else{
+          console.log(error);
+      }
+    });
+};
+
 exports.deleteFavouriteFood = function deleteData(url,session, username ,favouriteFood, id, callback){
     var options = {
         url: url + "\\" + id,

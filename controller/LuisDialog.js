@@ -140,6 +140,19 @@ exports.startDialog = function (bot) {
     ]).triggerAction({
         matches: 'LookForFavourite'
     });
+
+    bot.dialog('QnA', [
+    function (session, args, next) {
+        session.dialogData.args = args || {};
+        builder.Prompts.text(session, "What is your question?");
+    },
+    function (session, results, next) {
+        qna.talkToQnA(session, results.response);
+    }
+    
+    ]).triggerAction({
+        matches: 'QnA'
+    });
     
 
     bot.dialog('WelcomeIntent', [
