@@ -3,6 +3,7 @@ var food = require("./FavouriteFoods");
 var restaurant = require('./RestaurantCard');
 var nutrition = require('./NutritionCard');
 var customVision = require('./CustomVision');
+var qna = require('./QnAMaker');
 var isAttachment = false;
 
 exports.startDialog = function (bot) {
@@ -149,7 +150,7 @@ exports.startDialog = function (bot) {
     function (session, results, next) {
         qna.talkToQnA(session, results.response);
     }
-    
+
     ]).triggerAction({
         matches: 'QnA'
     });
